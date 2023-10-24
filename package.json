@@ -1,0 +1,86 @@
+{
+  "name": "tenant-option-management-plugin",
+  "version": "1017.0.357",
+  "description": "This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:",
+  "scripts": {
+    "start": "c8ycli server -p 9058 -u https://entelios-dev.eu-latest.cumulocity.com/ --shell administration",
+    "build": "c8ycli build",
+    "deploy": "c8ycli deploy",
+    "postinstall": "ngcc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@angular/animations": "14.0.6",
+    "@angular/cdk": "14.1.2",
+    "@angular/common": "14.0.6",
+    "@angular/compiler": "14.0.6",
+    "@angular/core": "14.0.6",
+    "@angular/forms": "14.0.6",
+    "@angular/platform-browser": "14.0.6",
+    "@angular/platform-browser-dynamic": "14.0.6",
+    "@angular/router": "14.0.6",
+    "@angular/upgrade": "14.0.6",
+    "@c8y/client": "1017.0.357",
+    "@c8y/ngx-components": "1017.0.357",
+    "@ngx-translate/core": "14.0.0",
+    "ngx-bootstrap": "9.0.0",
+    "rxjs": "~6.6.3",
+    "zone.js": "~0.11.7",
+    "@c8y/style": "1017.0.357"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "14.0.6",
+    "@angular-eslint/eslint-plugin-template": "^14.0.2",
+    "@angular-eslint/template-parser": "^14.0.2",
+    "@angular/compiler-cli": "14.0.6",
+    "@angular/language-service": "14.0.6",
+    "@angular/service-worker": "14.0.6",
+    "@angular/localize": "14.0.6",
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/jest": "^28.1.6",
+    "@types/lodash": "^4.14.186",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.3",
+    "jest-preset-angular": "^12.2.5",
+    "typescript": "4.7.4",
+    "prettier": "^2.7.1",
+    "@c8y/cli": "1017.0.357"
+  },
+  "c8y": {
+    "application": {
+      "name": "tenant-option-management-plugin",
+      "description": "Custom widget with module federation",
+      "contextPath": "tenant-option-management-plugin",
+      "key": "tenant-option-management-plugin-application-key",
+      "globalTitle": "Custom widget with Module Federation",
+      "tabsHorizontal": true,
+      "isPackage": true,
+      "noAppSwitcher": true,
+      "package": "plugin",
+      "exports": [
+        {
+          "name": "Tenant option plugin",
+          "module": "TenantOptionManagementModule",
+          "path": "./tenant-option-management/tenant-option-management.module.ts",
+          "description": "Todo"
+        }
+      ],
+      "remotes": {
+        "widget-plugin": [
+          "TenantOptionManagementModule"
+        ]
+      }
+    },
+    "cli": {}
+  },
+  "browserslist": [
+    "last 2 major versions"
+  ]
+}

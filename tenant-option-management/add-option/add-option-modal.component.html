@@ -1,0 +1,68 @@
+<c8y-modal [customFooter]="true" #modal>
+  <ng-container c8y-modal-title>
+    <h1><i class="c8y-icon c8y-icon-device"></i></h1>
+    <h3 id="modal-title">{{ 'Create Tenant Option' | translate }}</h3>
+  </ng-container>
+  <div class="modal-body">
+    <c8y-form-group class="m-b-16">
+      <label for="categoryInput" translate>Category</label>
+      <input
+        autofocus
+        type="text"
+        class="form-control"
+        id="categoryInput"
+        [(ngModel)]="option.category"
+        required
+      />
+    </c8y-form-group>
+
+    <c8y-form-group class="m-b-16">
+      <label for="keyInput" translate>Key</label>
+      <input type="text" class="form-control" id="keyInput" [(ngModel)]="option.key" required />
+    </c8y-form-group>
+
+    <c8y-form-group class="m-b-16">
+      <label for="valueInput" translate>Value</label>
+      <input type="text" class="form-control" id="valueInput" [(ngModel)]="option.value" required />
+    </c8y-form-group>
+
+    <c8y-form-group class="m-b-16">
+      <button
+        type="button"
+        class="btn"
+        btnCheckbox
+        btnCheckboxTrue="1"
+        btnCheckboxFalse="0"
+        [(ngModel)]="option.encrypted"
+      >
+        <i
+          c8yIcon="lock"
+          [class]="{
+            'text-success': option.encrypted === '1',
+            'text-danger': option.encrypted === '0'
+          }"
+        ></i>
+        Encrypt
+      </button>
+    </c8y-form-group>
+  </div>
+  <div class="modal-footer separator-top bg-level-0 sticky-bottom">
+    <button
+      title="{{ 'Cancel' | translate }}"
+      class="btn btn-default"
+      type="button"
+      (click)="close()"
+    >
+      {{ 'Cancel' | translate }}
+    </button>
+    <button
+      title="{{ 'Save' | translate }}"
+      class="btn btn-primary"
+      type="button"
+      (click)="save()"
+      [disabled]="!option.key.length || !option.category.length || !option.value.length"
+    >
+      {{ 'Save' | translate }}
+    </button>
+  </div>
+</c8y-modal>

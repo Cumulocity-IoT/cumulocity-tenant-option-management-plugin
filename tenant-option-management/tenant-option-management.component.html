@@ -1,0 +1,18 @@
+<c8y-action-bar-item [placement]="'right'" [priority]="500">
+  <button
+    title="{{ 'Add tenant option' | translate }}"
+    type="button"
+    class="btn btn-link"
+    (click)="openModal()"
+  >
+    <i c8yIcon="plus"></i> {{ 'Add tenant option' | translate }}
+  </button>
+</c8y-action-bar-item>
+
+<c8y-data-grid
+  [title]="'Tenant Options' | translate"
+  [columns]="columns"
+  [rows]="rows"
+  [pagination]="pagination"
+  [actionControls]="[]"
+></c8y-data-grid>
