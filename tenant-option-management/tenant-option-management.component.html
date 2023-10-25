@@ -14,5 +14,15 @@
   [columns]="columns"
   [rows]="rows"
   [pagination]="pagination"
-  [actionControls]="[]"
-></c8y-data-grid>
+  [actionControls]="actionControls"
+  (onReload)="reload()"
+>
+  <c8y-column name="content">
+    <ng-container *c8yCellRendererDef="let context">
+      <span *ngIf="!context.value"><c8y-loading></c8y-loading></span>
+      <span *ngIf="context.value" title="{{ context.value }}" class="overflow-cell">{{
+        context.value
+      }}</span>
+    </ng-container>
+  </c8y-column>
+</c8y-data-grid>

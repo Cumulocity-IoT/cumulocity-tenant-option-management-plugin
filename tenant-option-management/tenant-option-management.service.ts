@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IManagedObject, ITenantOption, InventoryService, TenantOptionsService } from '@c8y/client';
+import { TenantOptionRow } from './tenant-option-management.component';
 
 export interface TenantOptionConfiguration extends IManagedObject {
   type: 'tenant_option_plugin_config';
@@ -38,5 +39,27 @@ export class TenantOptionManagementService {
     config.options.push(option);
 
     return this.inventory.update({ id: config.id, options: config.options });
+  }
+
+  updateOption(option: ITenantOption) {
+    return this.tenantOption.update(option);
+  }
+
+  getAllOptions() {
+    return this.tenantOption
+      .list({
+        pageSize: 2000,
+      })
+      .then((res) => res.data.map((o) => ({ id: `${o.category}-${o.key}`, value: o.value })));
+  }
+
+  async deleteOption(row: TenantOptionRow) {
+    await this.tenantOption.delete(row);
+    const config = await this.getConfiguration();
+    const delta = {
+      id: config.id,
+      options: config.options.filter((o) => o.category !== row.category && o.key !== row.category),
+    };
+    await this.inventory.update(delta);
   }
 }

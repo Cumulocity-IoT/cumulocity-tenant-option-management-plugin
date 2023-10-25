@@ -6,9 +6,10 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TenantOptionManagementComponent } from './tenant-option-management.component';
 import { TenantOptionManagementService } from './tenant-option-management.service';
 import { AddOptionModalComponent } from './add-option/add-option-modal.component';
+import { JsonEditorComponent } from './editor/jsoneditor.component';
 
 @NgModule({
-  declarations: [TenantOptionManagementComponent, AddOptionModalComponent],
+  declarations: [TenantOptionManagementComponent, AddOptionModalComponent, JsonEditorComponent],
   imports: [CommonModule, FormsModule, CoreModule, ButtonsModule],
   exports: [],
   providers: [
