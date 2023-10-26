@@ -17,7 +17,7 @@ interface Tab {
   templateUrl: './add-option-modal.component.html',
 })
 export class AddOptionModalComponent {
-  closeSubject: Subject<ITenantOption> = new Subject();
+  closeSubject: Subject<ITenantOption & { encrypted: string }> = new Subject();
 
   option = {
     key: '',

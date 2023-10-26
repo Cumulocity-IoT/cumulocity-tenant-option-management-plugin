@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IManagedObject, ITenantOption, InventoryService, TenantOptionsService } from '@c8y/client';
 import { TenantOptionRow } from './tenant-option-management.component';
+import { cloneDeep } from 'lodash';
 
 export interface TenantOptionConfiguration extends IManagedObject {
   type: 'tenant_option_plugin_config';
@@ -30,15 +31,18 @@ export class TenantOptionManagementService {
     }
   }
 
-  async addOption(option: ITenantOption) {
+  async addOption(
+    option: ITenantOption & { encrypted: string }
+  ): Promise<ITenantOption & { encrypted: string }> {
     await this.tenantOption.create(option);
-    delete option.value;
 
     const config = await this.getConfiguration();
+    const toSend = cloneDeep(option);
+    delete toSend.value;
+    config.options.push(toSend);
+    await this.inventory.update({ id: config.id, options: config.options });
 
-    config.options.push(option);
-
-    return this.inventory.update({ id: config.id, options: config.options });
+    return option;
   }
 
   updateOption(option: ITenantOption) {
@@ -54,11 +58,15 @@ export class TenantOptionManagementService {
   }
 
   async deleteOption(row: TenantOptionRow) {
-    await this.tenantOption.delete(row);
+    try {
+      await this.tenantOption.delete({ category: row.category, key: row.key });
+    } catch (e) {
+      console.warn(e);
+    }
     const config = await this.getConfiguration();
     const delta = {
       id: config.id,
-      options: config.options.filter((o) => o.category !== row.category && o.key !== row.category),
+      options: config.options.filter((o) => o.category !== row.category || o.key !== row.key),
     };
     await this.inventory.update(delta);
   }

@@ -1,15 +1,21 @@
 {
   "name": "tenant-option-management-plugin",
-  "version": "1017.0.357",
+  "version": "1.0.0",
   "description": "This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:",
   "scripts": {
-    "start": "c8ycli server -p 9058 -u https://entelios-dev.eu-latest.cumulocity.com/ --shell administration",
+    "start": "c8ycli server",
     "build": "c8ycli build",
     "deploy": "c8ycli deploy",
     "postinstall": "ngcc"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Cumulocity",
+    "Plugin",
+    "Tenant Option",
+    "Management",
+    "Administration"
+  ],
+  "author": "Hendrik Naether",
   "license": "Apache-2.0",
   "dependencies": {
     "@angular/animations": "14.0.6",
@@ -57,14 +63,15 @@
   "c8y": {
     "application": {
       "name": "tenant-option-management-plugin",
-      "description": "Custom widget with module federation",
+      "description": "Adds menu entry. Users can add/update/delete tenant options.",
       "contextPath": "tenant-option-management-plugin",
       "key": "tenant-option-management-plugin-application-key",
-      "globalTitle": "Custom widget with Module Federation",
+      "globalTitle": "Tenant Option Management plugin",
       "tabsHorizontal": true,
       "isPackage": true,
       "noAppSwitcher": true,
       "package": "plugin",
+      "requiredPlatformVersion": "1017.0",
       "exports": [
         {
           "name": "Tenant option plugin",
@@ -77,7 +84,13 @@
         "widget-plugin": [
           "TenantOptionManagementModule"
         ]
-      }
+      },
+      "copy": [
+        {
+          "from": "docs",
+          "to": "docs"
+        }
+      ]
     },
     "cli": {}
   },

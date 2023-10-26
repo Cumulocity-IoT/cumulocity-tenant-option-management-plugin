@@ -1,29 +1,44 @@
-# Cumulocity widget plugin
+# Cumulocity IoT Tenant Option Management plugin
 
-This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:
+Easily create, edit and delete tenant options. You can configure an option as encrypted and can decided between text or JSON input.
 
-```
-"exports": [
-  {
-     "name": "Example widget plugin",
-     "module": "WidgetPluginModule",
-     "path": "./widget/widget-plugin.module.ts",
-     "description": "Adds custom widget"
-  }
-]
-```
+## Sample images
+
+List all tenant options that were created on the tenant. You can search through, sort and filter all columns.
+![alt Tenant options grid example](/docs/overview.png)
+
+Easily create text or JSON options. You can also encrypt the content of an option.
+![alt Create tenant option example](/docs/create-option.png)
+
+JSON editor example
+![alt Update of a tenant option with JSOn value example](/docs/update-json-option.png)
+
+## Limitations
+
+You can only see, edit and delete options you created using the plugin.
+
+## Features to come
+
+-	(Bulk) Import and export of all options/ specific categories
+-	Import by Template
+o	dynamically show creation forms for c8y specific tenant options using formly
+o	will ship with example template for Analytics Builder options
+
+## Versions
+1.0.0 - WebSDK v. 1017
 
 **How to start**
-Run the command below to scaffold a `widget` plugin.
+Change the target tenant and application you want to run this plugin on in the `package.json`.
 
 ```
-c8ycli new <yourPluginName> widget-plugin
+c8ycli server -u https://{{your-tenant}}.cumulocity.com/ --shell {{administration}}
 ```
+Keep in mind that this plugin needs to have an app (e.g. cockpit) running with at least the same version as this plugin. if your tenant contains an older version, use the c8ycli to create a cockpit clone running with at least v 1017! Upload this clone to the target tenant and reference this name in the --shell command.
 
-As the app.module is a typical Cumuloctiy application, any new plugin can be tested via the CLI:
+The widget plugin can be locally tested via the start script:
 
 ```
-npm start -- --shell cockpit
+npm start
 ```
 
 In the Module Federation terminology, `widget` plugin is called `remote` and the `cokpit` is called `shell`. Modules provided by this `widget` will be loaded by the `cockpit` application at the runtime. This plugin provides a basic custom widget that can be accessed through the `Add widget` menu.

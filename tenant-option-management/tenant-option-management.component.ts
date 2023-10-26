@@ -104,7 +104,10 @@ export class TenantOptionManagementComponent {
         if (row) {
           void this.optionsManagement.updateOption(option).then(() => this.reload());
         } else {
-          void this.optionsManagement.addOption(option).then(() => this.reload());
+          void this.optionsManagement.addOption(option).then((o) => {
+            this.rows.push({ id: `${o.category}-${o.key}`, ...o });
+            this.rows = [...this.rows]; // trigger binding
+          });
         }
       }
     });
@@ -127,8 +130,6 @@ export class TenantOptionManagementComponent {
       { ok: _('Delete') as string, cancel: _('Cancel') as string }
     );
     await this.optionsManagement.deleteOption(row);
-    this.rows = this.rows.filter((r) => r.category !== row.category && r.key !== row.key);
-    // reload the grid to remove the just deleted item
-    // this.refresh.next();
+    this.rows = this.rows.filter((r) => r.category !== row.category || r.key !== row.key);
   }
 }
