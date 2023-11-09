@@ -10,11 +10,13 @@ import {
   Status,
   _,
 } from '@c8y/ngx-components';
-import { TenantOptionManagementService } from './tenant-option-management.service';
+import { TranslateService } from '@ngx-translate/core';
+import { take } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AddOptionModalComponent } from './add-option/add-option-modal.component';
-import { take } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import { TenantOptionManagementService } from './tenant-option-management.service';
+import { TemplateComponent } from './template/template.component';
+import { ImportOptionModalComponent } from './import-option/import-option-modal.component';
 
 export interface TenantOptionRow extends ITenantOption {
   id: string;
@@ -93,7 +95,7 @@ export class TenantOptionManagementComponent {
     ];
   }
 
-  openModal(row?: TenantOptionRow) {
+  openAddModal(row?: TenantOptionRow) {
     const modalRef = this.bsModalService.show(AddOptionModalComponent, {});
     modalRef.content.ids = this.rows.map((r) => r.id);
     if (row) {
@@ -113,8 +115,22 @@ export class TenantOptionManagementComponent {
     });
   }
 
+  openImportModal() {
+    const modalRef = this.bsModalService.show(ImportOptionModalComponent, {});
+    modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
+      if (o) {
+        this.rows.push({ id: `${o.category}-${o.key}`, ...o });
+        this.rows = [...this.rows]; // trigger binding
+      }
+    });
+  }
+
+  openTest() {
+    this.bsModalService.show(TemplateComponent, {});
+  }
+
   onEditRow(row: TenantOptionRow): void {
-    this.openModal(row);
+    this.openAddModal(row);
   }
 
   async onDeleteRow(row: TenantOptionRow) {

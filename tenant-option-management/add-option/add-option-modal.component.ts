@@ -15,6 +15,7 @@ interface Tab {
 
 @Component({
   templateUrl: './add-option-modal.component.html',
+  styleUrls: ['./add-option-modal.component.less'],
 })
 export class AddOptionModalComponent {
   closeSubject: Subject<ITenantOption & { encrypted: string }> = new Subject();
@@ -31,11 +32,13 @@ export class AddOptionModalComponent {
       id: 'text',
       label: 'Text',
       icon: 'text',
+      active: true,
     },
     {
       id: 'json',
       label: 'JSON',
       icon: 'json',
+      active: false,
     },
   ];
 

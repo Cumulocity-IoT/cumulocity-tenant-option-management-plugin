@@ -36,13 +36,26 @@ export class TenantOptionManagementService {
   ): Promise<ITenantOption & { encrypted: string }> {
     await this.tenantOption.create(option);
 
+    await this.addOptionToConfiguration(option);
+    return option;
+  }
+
+  private async addOptionToConfiguration(option: ITenantOption & { encrypted: string }) {
     const config = await this.getConfiguration();
+    if (config.options.find((o) => o.category === option.category && o.key === option.key)) {
+      return Promise.reject('Tenant option already exists!');
+    }
     const toSend = cloneDeep(option);
     delete toSend.value;
     config.options.push(toSend);
-    await this.inventory.update({ id: config.id, options: config.options });
+    return this.inventory.update({ id: config.id, options: config.options });
+  }
 
-    return option;
+  async importOption(keyCategory: ITenantOption): Promise<ITenantOption & { encrypted: string }> {
+    const { data: option } = await this.tenantOption.detail(keyCategory);
+    const combined = { ...option, encrypted: option.key.startsWith('credentials') ? '1' : '0' };
+    await this.addOptionToConfiguration(combined);
+    return combined;
   }
 
   updateOption(option: ITenantOption) {

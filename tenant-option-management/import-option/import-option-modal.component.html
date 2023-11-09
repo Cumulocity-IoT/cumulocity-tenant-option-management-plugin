@@ -1,0 +1,47 @@
+<c8y-modal [customFooter]="true" #modal>
+  <ng-container c8y-modal-title>
+    <h1><i class="c8y-icon c8y-icon-device"></i></h1>
+    <h3 id="modal-title">
+      {{ 'Import Tenant Option' | translate }}
+    </h3>
+  </ng-container>
+  <div class="modal-body">
+    <c8y-form-group class="m-b-16">
+      <label for="categoryInput" translate>Category</label>
+      <input
+        type="text"
+        class="form-control"
+        id="categoryInput"
+        [(ngModel)]="option.category"
+        required
+      />
+      <c8y-messages> </c8y-messages>
+    </c8y-form-group>
+
+    <c8y-form-group class="m-b-16">
+      <label for="keyInput" translate>Key</label>
+      <input type="text" class="form-control" id="keyInput" [(ngModel)]="option.key" required />
+      <c8y-messages> </c8y-messages>
+    </c8y-form-group>
+  </div>
+  <div class="modal-footer separator-top bg-level-0 sticky-bottom">
+    <button
+      title="{{ 'Cancel' | translate }}"
+      class="btn btn-default"
+      type="button"
+      (click)="close()"
+    >
+      {{ 'Cancel' | translate }}
+    </button>
+    <button
+      title="{{ 'Import' | translate }}"
+      class="btn btn-primary"
+      type="button"
+      (click)="import()"
+      [ngClass]="{ 'btn-pending': isLoading }"
+      [disabled]="!option.key.length || !option.category.length"
+    >
+      {{ 'Import' | translate }}
+    </button>
+  </div>
+</c8y-modal>

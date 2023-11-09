@@ -15,7 +15,7 @@ JSON editor example
 
 ## Limitations
 
-You can only see, edit and delete options you created using the plugin.
+You can only see, edit and delete options you created using the plugin. (You can add existing tenant options using the import button.)
 
 ## Features to come
 
@@ -23,7 +23,6 @@ You can only see, edit and delete options you created using the plugin.
 -	Import by Template
 o	dynamically show creation forms for c8y specific tenant options using formly
 o	will ship with example template for Analytics Builder options
-
 ## Versions
 1.0.0 - WebSDK v. 1017
 

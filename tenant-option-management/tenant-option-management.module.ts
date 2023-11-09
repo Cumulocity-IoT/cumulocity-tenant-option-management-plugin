@@ -3,14 +3,33 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule, FormsModule, hookNavigator, hookRoute } from '@c8y/ngx-components';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { FormlyModule } from '@ngx-formly/core';
 import { TenantOptionManagementComponent } from './tenant-option-management.component';
 import { TenantOptionManagementService } from './tenant-option-management.service';
 import { AddOptionModalComponent } from './add-option/add-option-modal.component';
 import { JsonEditorComponent } from './editor/jsoneditor.component';
+import { TemplateComponent } from './template/template.component';
+import { PanelWrapperComponent } from './template/panel-wrapper.component';
+import { ImportOptionModalComponent } from './import-option/import-option-modal.component';
 
 @NgModule({
-  declarations: [TenantOptionManagementComponent, AddOptionModalComponent, JsonEditorComponent],
-  imports: [CommonModule, FormsModule, CoreModule, ButtonsModule],
+  declarations: [
+    TenantOptionManagementComponent,
+    AddOptionModalComponent,
+    ImportOptionModalComponent,
+    JsonEditorComponent,
+    TemplateComponent,
+    PanelWrapperComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CoreModule,
+    ButtonsModule,
+    FormlyModule.forRoot({
+      wrappers: [{ name: 'panel', component: PanelWrapperComponent }],
+    }),
+  ],
   exports: [],
   providers: [
     TenantOptionManagementService,

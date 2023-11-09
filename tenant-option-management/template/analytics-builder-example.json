@@ -1,0 +1,128 @@
+[
+    {
+        "key": "analytics.builder",
+        "wrappers": [
+            "panel"
+        ],
+        "props": {
+            "label": "Status Reporting"
+        },
+        "fieldGroup": [
+            {
+                "type": "input",
+                "key": "status_device_name",
+                "defaultValue": "apama_status",
+                "templateOptions": {
+                    "description": "The name of the Cumulocity IoT device to which the status operations are to be published.",
+                    "type": "string",
+                    "label": "Status device name",
+                    "placeholder": "",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "status_period_secs",
+                "defaultValue": "0",
+                "templateOptions": {
+                    "description": "The frequency in seconds at which the status is to be published. You can enable status reporting by setting the frequency to a positive value",
+                    "type": "string",
+                    "label": "Status period seconds",
+                    "placeholder": "",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "status_send_type",
+                "defaultValue": "OPERATION",
+                "templateOptions": {
+                    "description": "How the status is to be published",
+                    "type": "string",
+                    "label": "Status send type",
+                    "placeholder": "e.g. OPERATION or EVENT or MEASUREMENT",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "status_send_keys",
+                "templateOptions": {
+                    "description": "A comma-separated list of field names to be used when publishing the status. If not set or empty, the status for all fields is published. For example, if you specify the following, then the status includes only the values for these fields in one measurement.",
+                    "type": "string",
+                    "label": "Status send keys",
+                    "placeholder": "e.g. numQueuedInput,numListeners,numMonitors",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "status_event_type",
+                "defaultValue": "apama_status",
+                "templateOptions": {
+                    "description": "The event type if the status is published as a Cumulocity IoT event, or the measurement type if the status is published as a Cumulocity IoT measurement.",
+                    "type": "string",
+                    "label": "Status event type",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "status_event_text",
+                "defaultValue": "Apama Status",
+                "templateOptions": {
+                    "description": "The event text if the status is published as a Cumulocity IoT event.",
+                    "type": "string",
+                    "label": "Status event text",
+                    "required": false
+                }
+            }
+        ]
+    },
+    {
+        "key": "analytics.builder",
+        "wrappers": [
+            "panel"
+        ],
+        "props": {
+            "label": "Model Timeouts"
+        },
+        "fieldGroup": [
+            {
+                "type": "input",
+                "key": "timedelay_secs",
+                "defaultValue": "1",
+                "templateOptions": {
+                    "description": "The maximum delay in seconds before the input block considers an event to be old.",
+                    "type": "string",
+                    "label": "Timedelay seconds",
+                    "placeholder": "",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "logging_throttle_secs",
+                "defaultValue": "1",
+                "templateOptions": {
+                    "description": "Logging throttling in seconds. Periodic log messages (for example, those reporting changes in the number of events being dropped by the input block) will not appear more frequently than defined by this constant.",
+                    "type": "string",
+                    "label": "Logging throttle seconds",
+                    "placeholder": "",
+                    "required": false
+                }
+            },
+            {
+                "type": "input",
+                "key": "minimum_wait_time_secs",
+                "templateOptions": {
+                    "description": "The minimum wait time in seconds. Some blocks can generate output automatically, based on the rate of change of the output. This sets a lower limit on the time between such outputs.",
+                    "type": "string",
+                    "label": "Minimum Wait Time Seconds",
+                    "placeholder": "",
+                    "required": false
+                }
+            }
+        ]
+    }
+]
