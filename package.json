@@ -1,6 +1,6 @@
 {
   "name": "tenant-option-management-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:",
   "scripts": {
     "start": "c8ycli server",
