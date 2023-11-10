@@ -62,11 +62,11 @@
   },
   "c8y": {
     "application": {
-      "name": "tenant-option-management-plugin",
+      "name": "Tenant Option Management Plugin",
       "description": "Adds menu entry. Users can add/update/delete tenant options.",
-      "contextPath": "tenant-option-management-plugin",
-      "key": "tenant-option-management-plugin-application-key",
-      "globalTitle": "Tenant Option Management plugin",
+      "contextPath": "sag-ps-iot-pkg-tenant-option-management-plugin",
+      "key": "sag-ps-iot-pkg-tenant-option-management-plugin-application-key",
+      "globalTitle": "Tenant Option Management Plugin",
       "tabsHorizontal": true,
       "isPackage": true,
       "noAppSwitcher": true,
