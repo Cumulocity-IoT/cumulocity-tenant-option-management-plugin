@@ -1,4 +1,15 @@
-<c8y-title> {{ 'Tenant Option Management' | translate }} </c8y-title>
+<c8y-title> {{ 'Tenant Option Management ' | translate }} </c8y-title>
+
+<c8y-action-bar-item [placement]="'right'" [priority]="90">
+  <button
+    title="{{ 'Export' | translate }}"
+    type="button"
+    class="btn btn-link"
+    (click)="openExportModal()"
+  >
+    <i c8yIcon="upload"></i> {{ 'Export' | translate }}
+  </button>
+</c8y-action-bar-item>
 
 <c8y-action-bar-item [placement]="'right'" [priority]="100">
   <button
