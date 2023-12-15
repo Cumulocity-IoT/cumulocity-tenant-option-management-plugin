@@ -9,6 +9,8 @@ export interface TenantOptionConfiguration extends IManagedObject {
 }
 @Injectable()
 export class TenantOptionManagementService {
+  private readonly MAX_PAGE_SIZE = 2000;
+
   constructor(private inventory: InventoryService, private tenantOption: TenantOptionsService) {}
 
   async getConfiguration(): Promise<TenantOptionConfiguration> {
@@ -62,12 +64,35 @@ export class TenantOptionManagementService {
     return this.tenantOption.update(option);
   }
 
-  getAllOptions() {
-    return this.tenantOption
-      .list({
-        pageSize: 2000,
-      })
-      .then((res) => res.data.map((o) => ({ id: `${o.category}-${o.key}`, value: o.value })));
+  async getAllOptions(): Promise<{ id: string; value: string }[]> {
+    try {
+      const tenantOptions: ITenantOption[] = [];
+      const response = await this.tenantOption.list({
+        pageSize: this.MAX_PAGE_SIZE,
+        withTotalPages: true,
+      });
+
+      tenantOptions.push(...response.data);
+
+      for (
+        let currentPage = response.paging.currentPage + 1;
+        currentPage <= response.paging.totalPages;
+        currentPage++
+      ) {
+        const { data } = await this.tenantOption.list({
+          pageSize: this.MAX_PAGE_SIZE,
+          currentPage: currentPage,
+        });
+
+        tenantOptions.push(...data);
+      }
+
+      return tenantOptions.map((o) => ({ id: `${o.category}-${o.key}`, value: o.value }));
+    } catch (error) {
+      console.error(error);
+
+      return undefined;
+    }
   }
 
   async deleteOption(row: TenantOptionRow) {
