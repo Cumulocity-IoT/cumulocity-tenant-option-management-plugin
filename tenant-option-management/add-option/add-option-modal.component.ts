@@ -61,11 +61,18 @@ export class AddOptionModalComponent {
       value: row.value,
     };
     let tabId: 'text' | 'json' = 'json';
+
     try {
+      // boolean values and numberic values should be handled as text
+      if (this.isBooleanValue(this.option.value) || this.isNumberValue(this.option.value)) {
+        throw new Error('Not valid JSON!');
+      }
+
       this.jsonEditorData = JSON.parse(this.option.value) as object;
     } catch (e) {
       tabId = 'text';
     }
+
     this.tabs.map((t) => {
       t.active = t.id === tabId;
     });
@@ -110,5 +117,13 @@ export class AddOptionModalComponent {
   close() {
     this.closeSubject.next(null);
     this.modal.hide();
+  }
+
+  private isBooleanValue(value: string): boolean {
+    return ['true', 'false'].includes(value.toLowerCase());
+  }
+
+  private isNumberValue(value: string): boolean {
+    return !isNaN(Number(value));
   }
 }
