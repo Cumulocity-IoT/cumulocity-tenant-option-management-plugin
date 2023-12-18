@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IManagedObject, ITenantOption, InventoryService, TenantOptionsService } from '@c8y/client';
 import { TenantOptionRow } from './tenant-option-management.component';
 import { cloneDeep } from 'lodash';
+import { AlertService } from '@c8y/ngx-components';
 
 export interface TenantOptionConfiguration extends IManagedObject {
   type: 'tenant_option_plugin_config';
@@ -11,7 +12,11 @@ export interface TenantOptionConfiguration extends IManagedObject {
 export class TenantOptionManagementService {
   private readonly MAX_PAGE_SIZE = 2000;
 
-  constructor(private inventory: InventoryService, private tenantOption: TenantOptionsService) {}
+  constructor(
+    private inventory: InventoryService,
+    private tenantOption: TenantOptionsService,
+    private alertService: AlertService
+  ) {}
 
   async getConfiguration(): Promise<TenantOptionConfiguration> {
     const { data } = await this.inventory.list({
@@ -91,7 +96,9 @@ export class TenantOptionManagementService {
     } catch (error) {
       console.error(error);
 
-      return undefined;
+      this.alertService.danger('Failed to load tenant options', (error as Error).message);
+
+      return [];
     }
   }
 
