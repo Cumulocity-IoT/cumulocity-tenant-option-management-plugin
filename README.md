@@ -24,7 +24,8 @@ You can only see, edit and delete options you created using the plugin. (You can
 o	dynamically show creation forms for c8y specific tenant options using formly
 o	will ship with example template for Analytics Builder options
 ## Versions
-1.0.0 - WebSDK v. 1017
+1.0.x - compatible with UI v. 1017
+In the future: 2.0.x - compatible with UI v. 1018
 
 **How to start**
 Change the target tenant and application you want to run this plugin on in the `package.json`.
