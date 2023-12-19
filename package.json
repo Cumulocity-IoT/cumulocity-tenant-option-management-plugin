@@ -1,6 +1,6 @@
 {
-  "name": "tenant-option-management-plugin",
-  "version": "1.0.2",
+  "name": "sag-ps-iot-pkg-tenant-option-management-plugin",
+  "version": "1.0.3",
   "description": "This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:",
   "scripts": {
     "start": "c8ycli server",
@@ -28,14 +28,14 @@
     "@angular/platform-browser-dynamic": "14.0.6",
     "@angular/router": "14.0.6",
     "@angular/upgrade": "14.0.6",
-    "@c8y/client": "1017.0.357",
-    "@c8y/ngx-components": "1017.0.357",
+    "@c8y/client": "1017.0.338",
+    "@c8y/ngx-components": "1017.0.338",
     "@ngx-translate/core": "14.0.0",
     "ngx-bootstrap": "9.0.0",
     "jsoneditor": "^9.10.2",
     "rxjs": "~6.6.3",
     "zone.js": "~0.11.7",
-    "@c8y/style": "1017.0.357"
+    "@c8y/style": "1017.0.338"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "14.0.6",
@@ -58,7 +58,7 @@
     "jest-preset-angular": "^12.2.5",
     "typescript": "4.7.4",
     "prettier": "^2.7.1",
-    "@c8y/cli": "1017.0.357"
+    "@c8y/cli": "1017.0.338"
   },
   "c8y": {
     "application": {
@@ -71,7 +71,7 @@
       "isPackage": true,
       "noAppSwitcher": true,
       "package": "plugin",
-      "requiredPlatformVersion": "1017.0",
+      "requiredPlatformVersion": "1017.0.338",
       "exports": [
         {
           "name": "Tenant option plugin",
