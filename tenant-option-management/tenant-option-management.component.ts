@@ -15,7 +15,6 @@ import { take } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AddOptionModalComponent } from './add-option/add-option-modal.component';
 import { TenantOptionManagementService } from './tenant-option-management.service';
-import { TemplateComponent } from './template/template.component';
 import { ImportOptionModalComponent } from './import-option/import-option-modal.component';
 import { ExportModalComponent } from './export-modal/export-modal.component';
 
@@ -128,15 +127,11 @@ export class TenantOptionManagementComponent {
 
   openExportModal() {
     const modalRef = this.bsModalService.show(ExportModalComponent, {});
-    modalRef.content.rows = this.rows;
     modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
       console.log(o)
     });
   }
 
-  openTest() {
-    this.bsModalService.show(TemplateComponent, {});
-  }
 
   onEditRow(row: TenantOptionRow): void {
     this.openAddModal(row);

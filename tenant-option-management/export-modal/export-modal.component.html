@@ -6,15 +6,34 @@
     </h3>
   </ng-container>
   <div class="modal-body">
-
-
+    <c8y-data-grid
+      [title]="'Tenant Options' | translate"
+      [columns]="columns"
+      [rows]="rows"
+      [pagination]="pagination"
+      [actionControls]="[]"
+      [selectable]="selectable"
+      (itemsSelect)="onItemsSelect($event)"
+      (onReload)="reload()"
+    >
+    </c8y-data-grid>
   </div>
   <div class="modal-footer separator-top bg-level-0 sticky-bottom">
-    <button title="{{ 'Cancel' | translate }}" class="btn btn-default" type="button" (click)="close()">
+    <button
+      title="{{ 'Cancel' | translate }}"
+      class="btn btn-default"
+      type="button"
+      (click)="close()"
+    >
       {{ 'Cancel' | translate }}
     </button>
-    <button title="{{ 'Export' | translate }}" class="btn btn-primary" type="button" (click)="export()"
-      [ngClass]="{ 'btn-pending': isLoading }">
+    <button
+      title="{{ 'Export' | translate }}"
+      class="btn btn-primary"
+      type="button"
+      (click)="export()"
+      [ngClass]="{ 'btn-pending': isLoading }"
+    >
       {{ 'Export' | translate }}
     </button>
   </div>
