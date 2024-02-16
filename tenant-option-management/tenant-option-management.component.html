@@ -7,18 +7,29 @@
     class="btn btn-link"
     (click)="openExportModal()"
   >
-    <i c8yIcon="upload"></i> {{ 'Export' | translate }}
+    <i c8yIcon="download"></i> {{ 'Export' | translate }}
+  </button>
+</c8y-action-bar-item>
+
+<c8y-action-bar-item [placement]="'right'" [priority]="90">
+  <button
+    title="{{ 'Import ' | translate }}"
+    type="button"
+    class="btn btn-link"
+    (click)="openImportFromFileModal()"
+  >
+    <i c8yIcon="upload"></i> {{ 'Import' | translate }}
   </button>
 </c8y-action-bar-item>
 
 <c8y-action-bar-item [placement]="'right'" [priority]="100">
   <button
-    title="{{ 'Import existing' | translate }}"
+    title="{{ 'Add existing' | translate }}"
     type="button"
     class="btn btn-link"
     (click)="openImportModal()"
   >
-    <i c8yIcon="upload"></i> {{ 'Import existing' | translate }}
+    <i c8yIcon="add-property"></i> {{ 'Add existing' | translate }}
   </button>
 </c8y-action-bar-item>
 

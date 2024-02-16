@@ -2,11 +2,14 @@
   <ng-container c8y-modal-title>
     <h1><i class="c8y-icon c8y-icon-device"></i></h1>
     <h3 id="modal-title">
-      {{ 'Export Tenant Option' | translate }}
+      {{ 'Import Tenant Option' | translate }}
     </h3>
   </ng-container>
   <div class="modal-body">
+    <input type="file" (change)="onFileSelected($event)" accept="application/json" />
+
     <c8y-data-grid
+      *ngIf="rows.length > 0"
       [title]="'Tenant Options' | translate"
       [columns]="columns"
       [rows]="rows"
@@ -29,13 +32,13 @@
       {{ 'Cancel' | translate }}
     </button>
     <button
-      title="{{ 'Export' | translate }}"
+      title="{{ 'Import' | translate }}"
       class="btn btn-primary"
       type="button"
       (click)="export()"
       [ngClass]="{ 'btn-pending': isLoading }"
     >
-      {{ 'Export' | translate }}
+      {{ 'Import' | translate }}
     </button>
   </div>
 </c8y-modal>

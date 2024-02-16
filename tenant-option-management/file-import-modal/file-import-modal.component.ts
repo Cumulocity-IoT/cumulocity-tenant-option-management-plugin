@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { ITenantOption } from '@c8y/client';
-import { Column, ColumnDataType, DisplayOptions, Pagination } from '@c8y/ngx-components';
+import {
+  AlertService,
+  Column,
+  ColumnDataType,
+  DisplayOptions,
+  Pagination,
+} from '@c8y/ngx-components';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
-import { TenantOptionManagementService } from '../tenant-option-management.service';
-import { TenantOptionRow } from '../../tenant-option-management/tenant-option-management.component';
+import { TenantOptionRow } from '../tenant-option-management.component';
 
 @Component({
-  templateUrl: './export-modal.component.html',
+  templateUrl: './file-import-modal.component.html',
 })
-export class ExportModalComponent {
+export class FileImportModalComponent {
   closeSubject: Subject<(ITenantOption & { encrypted: string }) | null> = new Subject();
 
   columns: Column[] = [];
@@ -24,7 +29,7 @@ export class ExportModalComponent {
   };
 
   pagination: Pagination = {
-    pageSize: 50,
+    pageSize: 30,
     currentPage: 1,
   };
 
@@ -34,9 +39,8 @@ export class ExportModalComponent {
 
   title = 'Tenant Options Export';
 
-  constructor(private optionsManagement: TenantOptionManagementService, private modal: BsModalRef) {
+  constructor(private modal: BsModalRef, private alertService: AlertService) {
     this.columns = this.getDefaultColumns();
-    this.reload();
   }
 
   getDefaultColumns(): Column[] {
@@ -58,23 +62,34 @@ export class ExportModalComponent {
     ];
   }
 
+  onFileSelected(event) {
+    const file: File = event.target.files[0];
+
+    if (file && file.type === 'application/json') {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        try {
+          const fileContent = e.target.result;
+          this.rows = JSON.parse(fileContent);
+        } catch (error) {
+          this.alertService.danger('Invalid file content. Please select a valid JSON file.');
+          console.warn(error);
+        }
+      };
+
+      reader.readAsText(file);
+    } else {
+      this.alertService.danger('Invalid file type. Please select a JSON file.');
+      console.log('Invalid file type. Please select a JSON file.');
+    }
+  }
+
   onItemsSelect(selectedItemIds: string[]) {
     this.selectedItems = this.rows.filter((r) => selectedItemIds.includes(r.id));
   }
 
-  reload() {
-    void this.optionsManagement
-      .getConfiguration()
-      .then(
-        (config) =>
-          (this.rows = config.options.map((o) => ({ id: `${o.category}-${o.key}`, ...o }))),
-        () => (this.rows = [])
-      )
-      .then(() => this.optionsManagement.getAllOptions())
-      .then((allOptions) => {
-        this.rows.forEach((r) => (r.value = allOptions.find((o) => o.id === r.id)?.value));
-      });
-  }
+  reload() {}
 
   export() {
     this.isLoading = true;

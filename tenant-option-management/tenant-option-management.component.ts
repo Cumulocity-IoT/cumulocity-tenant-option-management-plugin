@@ -17,6 +17,7 @@ import { AddOptionModalComponent } from './add-option/add-option-modal.component
 import { TenantOptionManagementService } from './tenant-option-management.service';
 import { ImportOptionModalComponent } from './import-option/import-option-modal.component';
 import { ExportModalComponent } from './export-modal/export-modal.component';
+import { FileImportModalComponent } from './file-import-modal/file-import-modal.component';
 
 export interface TenantOptionRow extends ITenantOption {
   id: string;
@@ -115,6 +116,16 @@ export class TenantOptionManagementComponent {
     });
   }
 
+  openImportFromFileModal() {
+    const modalRef = this.bsModalService.show(FileImportModalComponent, {});
+    modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
+      if (o) {
+        this.rows.push({ id: `${o.category}-${o.key}`, ...o });
+        this.rows = [...this.rows]; // trigger binding
+      }
+    });
+  }
+
   openImportModal() {
     const modalRef = this.bsModalService.show(ImportOptionModalComponent, {});
     modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
@@ -127,11 +138,8 @@ export class TenantOptionManagementComponent {
 
   openExportModal() {
     const modalRef = this.bsModalService.show(ExportModalComponent, {});
-    modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
-      console.log(o)
-    });
+    modalRef.content.closeSubject.pipe(take(1)).subscribe();
   }
-
 
   onEditRow(row: TenantOptionRow): void {
     this.openAddModal(row);
