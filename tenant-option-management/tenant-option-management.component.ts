@@ -21,6 +21,15 @@ import { FileImportModalComponent } from './file-import-modal/file-import-modal.
 
 export interface TenantOptionRow extends ITenantOption {
   id: string;
+  status?: ImportStatus;
+}
+export enum ImportStatus {
+  LOADING = 'LOADING',
+  NEW = 'NEW',
+  CONFLICT = 'CONFLICT',
+  OVERWRITE = 'OVERWRITE',
+  UPDATED = 'UPDATED',
+  ADDED = 'ADDED',
 }
 @Component({
   templateUrl: './tenant-option-management.component.html',
@@ -118,11 +127,8 @@ export class TenantOptionManagementComponent {
 
   openImportFromFileModal() {
     const modalRef = this.bsModalService.show(FileImportModalComponent, {});
-    modalRef.content.closeSubject.pipe(take(1)).subscribe((o) => {
-      if (o) {
-        this.rows.push({ id: `${o.category}-${o.key}`, ...o });
-        this.rows = [...this.rows]; // trigger binding
-      }
+    modalRef.content.closeSubject.pipe(take(1)).subscribe(() => {
+      this.reload();
     });
   }
 

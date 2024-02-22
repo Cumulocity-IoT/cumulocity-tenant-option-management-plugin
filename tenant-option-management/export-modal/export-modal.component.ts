@@ -86,6 +86,7 @@ export class ExportModalComponent {
     link.download = 'export_tenant_options.json';
     link.click();
     this.isLoading = false;
+    this.close();
   }
 
   close() {
