@@ -1,4 +1,5 @@
 ./dist/
+.angular
 dist
 .idea
 coverage

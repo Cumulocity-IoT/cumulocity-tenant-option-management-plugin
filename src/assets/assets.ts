@@ -6,11 +6,9 @@
  *
  * If you need more types supported, add them to the d.ts file and add a webpack rule.
  */
-import previewImage from './widget-plugin-pr.png';
-
-// this will be a global style -> try to avoid as it could break existing styles
-// better use component based styling (see ../widget/widget-plugin.component.css)
-import './example.css';
+// import previewImage from './file-table.png';
 
 // paths can be shared via this module if needed
-export const assetPaths = { previewImage };
+// export const assetPaths = { previewImage };
+
+import './example.css';

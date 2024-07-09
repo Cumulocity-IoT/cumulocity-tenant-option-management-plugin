@@ -59,7 +59,7 @@ import { isEmpty } from 'lodash';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [
     './jsoneditor.component.less',
-    '../../node_modules/jsoneditor/dist/jsoneditor.min.css',
+    '../../../../node_modules/jsoneditor/dist/jsoneditor.min.css',
   ],
   encapsulation: ViewEncapsulation.None,
 })

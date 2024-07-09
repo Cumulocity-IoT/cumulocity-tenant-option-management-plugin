@@ -33,6 +33,7 @@ export class FileImportModalComponent {
     gridHeader: true,
     striped: false,
     filter: false,
+    hover: false
   };
 
   pagination: Pagination = {
