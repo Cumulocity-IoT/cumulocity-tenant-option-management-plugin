@@ -1,4 +1,4 @@
-<c8y-title> {{ 'Tenant Option Management ' | translate }} </c8y-title>
+<c8y-title> {{ 'Tenant Option Management' | translate }} </c8y-title>
 
 <c8y-action-bar-item [placement]="'right'" [priority]="90">
   <button
@@ -6,8 +6,9 @@
     type="button"
     class="btn btn-link"
     (click)="openExportModal()"
+    [disabled]="!rows?.length"
   >
-    <i c8yIcon="download"></i> {{ 'Export' | translate }}
+    <i c8yIcon="upload"></i> {{ 'Export' | translate }}
   </button>
 </c8y-action-bar-item>
 
@@ -18,7 +19,7 @@
     class="btn btn-link"
     (click)="openImportFromFileModal()"
   >
-    <i c8yIcon="upload"></i> {{ 'Import' | translate }}
+    <i c8yIcon="download"></i> {{ 'Import' | translate }}
   </button>
 </c8y-action-bar-item>
 
@@ -60,4 +61,13 @@
       }}</span>
     </ng-container>
   </c8y-column>
+
+  <c8y-ui-empty-state
+    [title]="'No Tenant Option created or imported yet.'"
+    [subtitle]="
+      'You can add existing Tenant Options, import a JSON file from a previous export, or create a new Tenant Option.'
+    "
+    [horizontal]="true"
+  >
+  </c8y-ui-empty-state>
 </c8y-data-grid>

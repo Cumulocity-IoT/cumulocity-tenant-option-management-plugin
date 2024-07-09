@@ -6,7 +6,7 @@
     </h3>
   </ng-container>
   <div class="modal-body">
-    <input type="file" (change)="onFileSelected($event)" accept="application/json" />
+    <input class="m-16" type="file" (change)="onFileSelected($event)" accept="application/json" />
 
     <c8y-data-grid
       *ngIf="rows.length > 0"
