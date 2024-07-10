@@ -6,23 +6,21 @@
     </h3>
   </ng-container>
   <div class="modal-body">
-    <c8y-form-group class="m-b-16">
-      <label for="categoryInput" translate>Category</label>
-      <input
-        type="text"
-        class="form-control"
-        id="categoryInput"
-        [(ngModel)]="option.category"
-        required
-      />
-      <c8y-messages> </c8y-messages>
-    </c8y-form-group>
+    <input class="m-16" type="file" (change)="onFileSelected($event)" accept="application/json" />
 
-    <c8y-form-group class="m-b-16">
-      <label for="keyInput" translate>Key</label>
-      <input type="text" class="form-control" id="keyInput" [(ngModel)]="option.key" required />
-      <c8y-messages> </c8y-messages>
-    </c8y-form-group>
+    <c8y-data-grid
+      *ngIf="rows.length > 0"
+      [title]="'Tenant Options' | translate"
+      [columns]="columns"
+      [rows]="rows"
+      [pagination]="pagination"
+      [actionControls]="[]"
+      [displayOptions]="displayOptions"
+      [selectable]="selectable"
+      (itemsSelect)="onItemsSelect($event)"
+      (onReload)="reload()"
+    >
+    </c8y-data-grid>
   </div>
   <div class="modal-footer separator-top bg-level-0 sticky-bottom">
     <button
@@ -39,7 +37,6 @@
       type="button"
       (click)="import()"
       [ngClass]="{ 'btn-pending': isLoading }"
-      [disabled]="!option.key.length || !option.category.length"
     >
       {{ 'Import' | translate }}
     </button>

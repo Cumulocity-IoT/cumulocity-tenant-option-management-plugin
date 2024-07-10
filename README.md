@@ -13,19 +13,20 @@ Easily create text or JSON options. You can also encrypt the content of an optio
 JSON editor example
 ![alt Update of a tenant option with JSOn value example](/docs/update-json-option.png)
 
+(Bulk) Import and export of all options/ specific categories
+![alt Import previously downloaded Tenant Option JSON file](/docs/import-json-options.png)
+
 ## Limitations
 
 You can only see, edit and delete options you created using the plugin. (You can add existing tenant options using the import button.)
 
 ## Features to come
-
--	(Bulk) Import and export of all options/ specific categories
 -	Import by Template
 o	dynamically show creation forms for c8y specific tenant options using formly
 o	will ship with example template for Analytics Builder options
 ## Versions
 1.0.x - compatible with UI v. 1017
-In the future: 2.0.x - compatible with UI v. 1018
+2.0.x - compatible with UI v. 1020
 
 **How to start**
 Change the target tenant and application you want to run this plugin on in the `package.json`.

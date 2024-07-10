@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ITenantOption } from '@c8y/client';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
-import { TenantOptionRow } from 'tenant-option-management/tenant-option-management.component';
+import { TenantOptionRow } from '../tenant-option-management.component';
 
 // TODO: add conflict detection!
 interface Tab {

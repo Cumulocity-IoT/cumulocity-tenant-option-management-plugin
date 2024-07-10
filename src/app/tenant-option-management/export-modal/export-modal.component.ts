@@ -4,7 +4,7 @@ import { Column, ColumnDataType, DisplayOptions, Pagination } from '@c8y/ngx-com
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { TenantOptionManagementService } from '../tenant-option-management.service';
-import { TenantOptionRow } from '../../tenant-option-management/tenant-option-management.component';
+import { TenantOptionRow } from '../tenant-option-management.component';
 
 @Component({
   templateUrl: './export-modal.component.html',
@@ -21,6 +21,7 @@ export class ExportModalComponent {
     gridHeader: true,
     striped: false,
     filter: false,
+    hover: false
   };
 
   pagination: Pagination = {

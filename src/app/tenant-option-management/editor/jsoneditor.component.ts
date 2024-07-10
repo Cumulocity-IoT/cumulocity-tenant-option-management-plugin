@@ -59,7 +59,7 @@ import { isEmpty } from 'lodash';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [
     './jsoneditor.component.less',
-    '../../node_modules/jsoneditor/dist/jsoneditor.min.css',
+    '../../../../node_modules/jsoneditor/dist/jsoneditor.min.css',
   ],
   encapsulation: ViewEncapsulation.None,
 })
@@ -86,16 +86,21 @@ export class JsonEditorComponent implements ControlValueAccessor, OnInit, OnDest
       this.ngOnInit();
     }
   }
+
   @Input() debug = false;
 
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
+
   @Output()
   onInit: EventEmitter<any> = new EventEmitter<any>();
+
   @Output()
   jsonChange: EventEmitter<any> = new EventEmitter<any>();
+
   @Output()
   textChange = new EventEmitter<string>();
+
   @Output()
   onPathChanged: EventEmitter<string> = new EventEmitter<string>();
 
@@ -409,5 +414,4 @@ export class JsonEditorComponent implements ControlValueAccessor, OnInit, OnDest
     return levels;
   }
 }
-
 export { JsonEditorOptions, JsonEditorMode, JsonEditorTreeNode, IError };

@@ -1,0 +1,10 @@
+/* 
+Global styles:
+Add the path to "example.css" in the "styles" entry of the angular.json file.
+This will be a global style -> try to avoid as it could break existing styles
+better use component based styling (see ../widget/widget-plugin.component.css)
+For more information, please check: https://angular.io/guide/workspace-config#styles-and-scripts-configuration
+*/
+.text {
+  color: var(--brand-primary);
+}

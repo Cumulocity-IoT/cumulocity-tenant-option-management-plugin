@@ -33,6 +33,7 @@ export class FileImportModalComponent {
     gridHeader: true,
     striped: false,
     filter: false,
+    hover: false
   };
 
   pagination: Pagination = {
@@ -64,20 +65,21 @@ export class FileImportModalComponent {
         name: 'category',
         path: 'category',
         filterable: true,
-        dataType: ColumnDataType.TextShort,
+        dataType: ColumnDataType.TextLong,
       },
       {
         header: 'Key',
         name: 'key',
         path: 'key',
         filterable: true,
-        dataType: ColumnDataType.TextShort,
+        dataType: ColumnDataType.TextLong,
       },
       {
         header: 'Status',
         name: 'status',
         path: 'status',
         filterable: true,
+        gridTrackSize: '9em',
         dataType: ColumnDataType.TextShort,
       },
     ];
