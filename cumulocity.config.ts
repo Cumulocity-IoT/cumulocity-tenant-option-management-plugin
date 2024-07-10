@@ -22,7 +22,7 @@ export default {
         name: "Tenant option plugin",
         module: "TenantOptionManagementModule",
         path: "./src/app/tenant-option-management/tenant-option-management.module.ts",
-        description: "Adds menu entry. Users can add/update/delete tenant options."
+        description: "Easily create, edit and delete tenant options. You can configure an option as encrypted and can decided between text or JSON input."
     }
     ]
   },
@@ -43,6 +43,12 @@ export default {
       'ngx-bootstrap',
       '@ngx-translate/core',
       '@ngx-formly/core'
+    ],
+    copy: [
+        {
+            from: "docs",
+            to: "docs"
+        }
     ]
   }
 } as const satisfies ConfigurationOptions;
